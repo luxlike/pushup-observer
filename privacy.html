@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>개인정보처리방침 — 푸시업 옵저버</title>
+<meta name="description" content="푸시업 옵저버 앱의 개인정보처리방침. 카메라 영상은 기기 내부에서만 처리되며 외부로 전송되지 않습니다.">
+<meta name="robots" content="index,follow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<style>
+:root {
+  --bg: #0a0a0a;
+  --bg-2: #111111;
+  --bg-3: #181818;
+  --line: #2a2a2a;
+  --line-2: #3a3a3a;
+  --text: #ffffff;
+  --text-2: #a1a1a1;
+  --text-3: #6b6b6b;
+  --accent: #FFD60A;
+  --accent-soft: rgba(255, 214, 10, 0.12);
+  --green: #34D399;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.65;
+  font-size: 16px;
+}
+
+a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+a:hover { opacity: 0.7; }
+
+.container { max-width: 880px; margin: 0 auto; padding: 0 32px; }
+@media (max-width: 640px) { .container { padding: 0 20px; } }
+
+/* Nav */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(10, 10, 10, 0.7);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text);
+}
+.logo-mark {
+  width: 28px;
+  height: 28px;
+  background: var(--accent);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-weight: 900;
+  font-size: 14px;
+  font-family: 'Anton', sans-serif;
+}
+.nav-back {
+  color: var(--text-2);
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-back:hover { color: var(--text); opacity: 1; }
+
+/* Header */
+.doc-header {
+  padding: 80px 0 60px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 60px;
+}
+.doc-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.doc-eyebrow::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+}
+.doc-title {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.doc-meta {
+  color: var(--text-3);
+  font-size: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.doc-meta span strong { color: var(--text-2); margin-right: 8px; }
+
+/* Summary callout */
+.summary {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin-bottom: 60px;
+}
+.summary h2 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: var(--accent);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.summary ul {
+  list-style: none;
+  padding: 0;
+}
+.summary li {
+  padding: 8px 0 8px 24px;
+  position: relative;
+  font-size: 15px;
+  color: var(--text);
+}
+.summary li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Document body */
+.doc-body { padding-bottom: 100px; }
+
+.doc-body section {
+  margin-bottom: 48px;
+}
+
+.doc-body h2 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+.doc-body h2 .num {
+  font-family: 'Anton', sans-serif;
+  font-size: 16px;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.doc-body h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 24px 0 12px;
+  color: var(--text);
+}
+
+.doc-body p {
+  margin-bottom: 14px;
+  color: var(--text-2);
+  font-size: 15px;
+}
+.doc-body p strong { color: var(--text); font-weight: 600; }
+
+.doc-body ul, .doc-body ol {
+  margin: 12px 0 18px 0;
+  padding-left: 22px;
+  color: var(--text-2);
+  font-size: 15px;
+}
+.doc-body li { margin-bottom: 6px; }
+.doc-body li strong { color: var(--text); font-weight: 600; }
+
+/* Tables */
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 20px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 14px;
+}
+.doc-table th, .doc-table td {
+  padding: 14px 18px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+.doc-table th {
+  background: var(--bg-3);
+  color: var(--text);
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.doc-table td { color: var(--text-2); }
+.doc-table tr:last-child th,
+.doc-table tr:last-child td { border-bottom: none; }
+.doc-table strong { color: var(--text); }
+
+/* Highlight box for important info */
+.note {
+  background: var(--bg-2);
+  border-left: 3px solid var(--accent);
+  padding: 16px 20px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 14px;
+  color: var(--text-2);
+}
+.note strong { color: var(--text); }
+
+.note.warn { border-left-color: var(--green); background: rgba(52, 211, 153, 0.06); }
+
+/* TODO badge */
+.todo-badge {
+  display: inline-block;
+  background: rgba(255, 214, 10, 0.18);
+  color: var(--accent);
+  padding: 1px 8px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  margin: 0 2px;
+  letter-spacing: 0.04em;
+}
+
+/* TOC */
+.toc {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 48px;
+}
+.toc h2 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+.toc ol {
+  list-style: none;
+  padding: 0;
+  columns: 2;
+  column-gap: 24px;
+}
+@media (max-width: 640px) { .toc ol { columns: 1; } }
+.toc li {
+  padding: 6px 0;
+  break-inside: avoid;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--text-2);
+  counter-increment: toc;
+}
+.toc li a { color: var(--text); display: block; }
+.toc li a::before {
+  content: counter(toc, decimal-leading-zero);
+  color: var(--accent);
+  margin-right: 10px;
+}
+.toc ol { counter-reset: toc; }
+
+/* Footer */
+footer {
+  background: var(--bg);
+  padding: 50px 0 30px;
+  border-top: 1px solid var(--line);
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.footer-links {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.footer-links a {
+  color: var(--text-2);
+  font-size: 13px;
+}
+.footer-links a:hover { color: var(--text); opacity: 1; }
+.footer-copy { color: var(--text-3); font-size: 12px; }
+
+@media (max-width: 768px) {
+  .doc-header { padding: 50px 0 40px; margin-bottom: 40px; }
+  .doc-body section { margin-bottom: 36px; }
+  .doc-body h2 { font-size: 19px; }
+  .summary { padding: 22px 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">PO</span>
+      <span>푸시업 옵저버</span>
+    </a>
+    <a href="index.html" class="nav-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m7-7l-7 7 7 7"/></svg>
+      홈으로
+    </a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <header class="doc-header">
+    <div class="doc-eyebrow">법적 고지 / Privacy Policy</div>
+    <h1 class="doc-title">개인정보처리방침</h1>
+    <div class="doc-meta">
+      <span><strong>시행일:</strong> 2026년 5월 1일</span>
+      <span><strong>버전:</strong> v1.0</span>
+    </div>
+  </header>
+
+  <!-- 핵심 요약 -->
+  <div class="summary">
+    <h2>📌 핵심 요약</h2>
+    <ul>
+      <li>카메라 영상은 <strong>기기 내부에서만 처리</strong>되며 외부 서버로 전송·저장되지 않습니다.</li>
+      <li>회원가입이 없으며 <strong>이름·이메일·전화번호 등 개인 식별 정보를 수집하지 않습니다.</strong></li>
+      <li>운동 기록은 <strong>사용자 기기에만 저장</strong>되며, iCloud 백업 외에는 외부로 동기화되지 않습니다.</li>
+      <li>멀티 디바이스 연동은 같은 네트워크 내 <strong>P2P(피어 투 피어) 통신</strong>으로 이루어집니다.</li>
+      <li>광고 식별자(IDFA)를 사용하지 않으며, <strong>제3자 추적 SDK가 포함되어 있지 않습니다.</strong></li>
+    </ul>
+  </div>
+
+  <div class="note warn">
+    <strong>본 문서 안내:</strong> 푸시업 옵저버(이하 "본 앱")는 사용자의 개인정보를 소중히 다루며, 「개인정보 보호법」을 비롯한 관련 법령을 준수합니다. 본 방침은 본 앱이 어떤 정보를 어떻게 처리하는지 투명하게 설명합니다.
+  </div>
+
+  <!-- TOC -->
+  <nav class="toc">
+    <h2>목차 / Table of Contents</h2>
+    <ol>
+      <li><a href="#s1">총칙</a></li>
+      <li><a href="#s2">수집하는 정보 및 권한</a></li>
+      <li><a href="#s3">정보의 이용 목적</a></li>
+      <li><a href="#s4">정보의 보유·이용 기간</a></li>
+      <li><a href="#s5">제3자 제공</a></li>
+      <li><a href="#s6">처리 위탁</a></li>
+      <li><a href="#s7">정보주체의 권리</a></li>
+      <li><a href="#s8">정보의 파기</a></li>
+      <li><a href="#s9">안전성 확보 조치</a></li>
+      <li><a href="#s10">자동 수집 장치</a></li>
+      <li><a href="#s11">보호책임자</a></li>
+      <li><a href="#s12">권익 침해 구제방법</a></li>
+      <li><a href="#s13">아동의 개인정보 보호</a></li>
+      <li><a href="#s14">방침의 변경</a></li>
+    </ol>
+  </nav>
+
+  <main class="doc-body">
+
+    <section id="s1">
+      <h2><span class="num">01</span>총칙</h2>
+      <p>
+        <span class="todo-badge">TODO: 사업자명</span>(이하 "운영자")가 제공하는 푸시업 옵저버 앱(이하 "본 앱")은
+        이용자의 개인정보를 보호하기 위해 「개인정보 보호법」 등 관련 법령에 따라 본 개인정보처리방침을 수립·공개합니다.
+      </p>
+      <p>
+        본 앱은 카메라를 활용한 자세 분석 기능을 제공하며, 모든 분석은 기기 내부의 머신러닝 모델로 수행됩니다.
+        영상 데이터가 운영자 또는 제3자의 서버로 전송되지 않습니다.
+      </p>
+    </section>
+
+    <section id="s2">
+      <h2><span class="num">02</span>수집하는 정보 및 권한</h2>
+
+      <h3>2.1 본 앱이 사용하는 기기 권한</h3>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th>권한</th>
+            <th>사용 목적</th>
+            <th>필수 여부</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>카메라</strong></td>
+            <td>운동 자세 실시간 분석 (영상은 기기 내부에서만 처리, 외부 전송 없음)</td>
+            <td>필수</td>
+          </tr>
+          <tr>
+            <td><strong>로컬 네트워크</strong></td>
+            <td>멀티 디바이스 연동 시 같은 네트워크 내 iPad·Mac과의 P2P 통신</td>
+            <td>선택</td>
+          </tr>
+          <tr>
+            <td><strong>사진</strong> (저장)</td>
+            <td>"영상 녹화" 옵션 사용 시 운동 영상을 사용자 사진 보관함에 저장</td>
+            <td>선택</td>
+          </tr>
+          <tr>
+            <td><strong>마이크</strong></td>
+            <td>"영상 녹화" 옵션 사용 시 음성 함께 녹음 (사용자가 비활성화 가능)</td>
+            <td>선택</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>2.2 수집하지 않는 정보</h3>
+      <p>본 앱은 다음 정보를 수집하지 않습니다.</p>
+      <ul>
+        <li>이름, 이메일, 전화번호, 주소 등 개인 식별 정보</li>
+        <li>위치 정보 (GPS·Wi-Fi 위치)</li>
+        <li>광고 식별자(IDFA), 디바이스 추적 식별자</li>
+        <li>연락처, 캘린더, 사진 보관함의 기존 콘텐츠</li>
+        <li>건강 데이터(HealthKit) <span class="todo-badge">현재 미연동, 추후 추가 시 본 항목 갱신 예정</span></li>
+      </ul>
+
+      <h3>2.3 자동으로 생성되는 정보</h3>
+      <p>다음 정보는 사용자의 기기에만 저장되며 운영자에게 전송되지 않습니다.</p>
+      <ul>
+        <li><strong>운동 기록</strong>: 운동 종목, 횟수, 시간, 달성률, 측정 일시</li>
+        <li><strong>녹화 영상</strong>: 사용자가 직접 활성화한 경우에만 생성, 기기 내 사진 보관함에 저장</li>
+      </ul>
+
+      <div class="note">
+        <strong>중요:</strong> 위 정보는 모두 사용자 기기 내부에 보관됩니다. iCloud 백업이 활성화된 경우 사용자의 iCloud 계정에 암호화되어 백업될 수 있으며, 이는 Apple의 정책에 따릅니다.
+      </div>
+    </section>
+
+    <section id="s3">
+      <h2><span class="num">03</span>정보의 이용 목적</h2>
+      <p>본 앱은 다음 목적으로만 정보를 이용합니다.</p>
+      <ol>
+        <li><strong>운동 자세 분석 및 카운트</strong>: 카메라 영상을 통해 사용자의 관절 각도를 측정하고 횟수를 자동 계산</li>
+        <li><strong>운동 기록 제공</strong>: 사용자가 자신의 운동 이력을 확인할 수 있도록 기기에 저장</li>
+        <li><strong>멀티 디바이스 연동</strong>: 사용자의 다른 기기(iPad·Mac)에 실시간 영상과 운동 데이터 전송</li>
+        <li><strong>운동 영상 저장</strong>: 사용자가 옵션을 활성화한 경우 자세 점검을 위해 사진 보관함에 저장</li>
+      </ol>
+    </section>
+
+    <section id="s4">
+      <h2><span class="num">04</span>정보의 보유·이용 기간</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th>정보 항목</th>
+            <th>보관 위치</th>
+            <th>보관 기간</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>운동 기록 (횟수·시간·날짜)</td>
+            <td>사용자 기기 내부</td>
+            <td>사용자 삭제 또는 앱 삭제 시까지</td>
+          </tr>
+          <tr>
+            <td>녹화 영상</td>
+            <td>사용자 사진 보관함</td>
+            <td>사용자가 직접 삭제할 때까지</td>
+          </tr>
+          <tr>
+            <td>카메라 실시간 영상</td>
+            <td>저장하지 않음 (실시간 처리 후 즉시 폐기)</td>
+            <td>해당 없음</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>운영자는 사용자의 정보를 별도로 보관하지 않으므로, 보유 기간이 별도로 적용되지 않습니다.</p>
+    </section>
+
+    <section id="s5">
+      <h2><span class="num">05</span>제3자 제공</h2>
+      <p>운영자는 사용자의 정보를 <strong>어떠한 제3자에게도 제공하지 않습니다.</strong></p>
+      <p>다만, 다음의 경우에는 예외로 합니다.</p>
+      <ul>
+        <li>이용자가 사전에 동의한 경우</li>
+        <li>법령의 규정에 의하거나 수사기관의 요구가 있는 경우</li>
+      </ul>
+    </section>
+
+    <section id="s6">
+      <h2><span class="num">06</span>처리 위탁</h2>
+      <p>운영자는 사용자의 개인정보 처리 업무를 외부에 위탁하지 않습니다.</p>
+      <p>
+        <span class="todo-badge">TODO: 분석 도구 사용 시</span>
+        만약 향후 익명화된 사용 통계 수집을 위한 분석 도구(예: Apple App Analytics)를 도입할 경우,
+        본 항목을 갱신하여 위탁 업체와 위탁 업무 내용을 명시합니다.
+      </p>
+    </section>
+
+    <section id="s7">
+      <h2><span class="num">07</span>정보주체의 권리</h2>
+      <p>이용자는 「개인정보 보호법」 제35조에 따라 다음의 권리를 행사할 수 있습니다.</p>
+      <ul>
+        <li><strong>열람·확인</strong>: 본 앱의 "기록" 탭에서 본인의 운동 기록을 직접 확인 가능</li>
+        <li><strong>수정·삭제</strong>: 운동 기록은 "기록" 탭의 Edit 버튼으로 직접 삭제 가능</li>
+        <li><strong>처리 정지</strong>: 앱 삭제로 모든 데이터 처리를 즉시 중단할 수 있음</li>
+      </ul>
+      <p>
+        본 앱은 운영자의 서버에 사용자 정보를 보관하지 않으므로, 별도의 열람·정정·삭제 청구 절차가 필요하지 않습니다.
+        모든 데이터는 사용자가 직접 통제합니다.
+      </p>
+    </section>
+
+    <section id="s8">
+      <h2><span class="num">08</span>정보의 파기</h2>
+      <p>본 앱은 사용자의 정보를 다음과 같이 파기합니다.</p>
+      <ul>
+        <li><strong>운동 기록 삭제</strong>: 사용자가 "기록" 탭에서 개별 또는 전체 삭제 시 즉시 파기</li>
+        <li><strong>앱 삭제</strong>: iOS의 앱 삭제 기능으로 본 앱과 관련된 모든 로컬 데이터가 즉시 파기</li>
+        <li><strong>녹화 영상</strong>: 사진 앱에서 사용자가 직접 삭제 (애플 정책에 따라 휴지통 보관 후 영구 삭제)</li>
+      </ul>
+    </section>
+
+    <section id="s9">
+      <h2><span class="num">09</span>안전성 확보 조치</h2>
+      <p>운영자는 이용자의 정보를 안전하게 보호하기 위해 다음과 같은 조치를 취하고 있습니다.</p>
+      <ol>
+        <li><strong>온디바이스 처리</strong>: 자세 분석 ML 모델이 사용자 기기에서 직접 동작하므로 영상이 외부로 노출되지 않습니다.</li>
+        <li><strong>iOS 시스템 보안</strong>: 사용자 데이터는 Apple이 제공하는 iOS의 샌드박스 환경에서 암호화되어 저장됩니다.</li>
+        <li><strong>암호화 통신</strong>: 멀티 디바이스 연동 시 같은 사용자 소유 기기 간에만 암호화된 채널로 데이터가 전송됩니다.</li>
+        <li><strong>최소 권한 원칙</strong>: 앱 동작에 필요한 최소한의 권한만 요청합니다.</li>
+      </ol>
+    </section>
+
+    <section id="s10">
+      <h2><span class="num">10</span>자동 수집 장치의 설치·운영 및 거부</h2>
+      <p>
+        본 앱은 쿠키, 광고 식별자(IDFA), 픽셀 등의 자동 수집 장치를 사용하지 않습니다.
+        Apple의 App Store에서 제공되는 익명 앱 분석(App Analytics)은 사용자가 iOS 설정 →
+        개인정보 보호 및 보안 → 분석 및 개선에서 비활성화할 수 있습니다.
+      </p>
+    </section>
+
+    <section id="s11">
+      <h2><span class="num">11</span>개인정보 보호책임자</h2>
+      <p>운영자는 이용자의 정보 관련 문의 및 불만 처리를 위해 아래와 같이 보호책임자를 지정하고 있습니다.</p>
+      <table class="doc-table">
+        <tbody>
+          <tr>
+            <th>성명</th>
+            <td><span class="todo-badge">TODO: 책임자 성명</span></td>
+          </tr>
+          <tr>
+            <th>직책</th>
+            <td><span class="todo-badge">TODO: 직책</span></td>
+          </tr>
+          <tr>
+            <th>이메일</th>
+            <td><span class="todo-badge">TODO: 이메일 주소</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="s12">
+      <h2><span class="num">12</span>권익 침해 구제방법</h2>
+      <p>이용자는 개인정보 침해와 관련하여 아래 기관에 분쟁 해결, 상담 등을 신청할 수 있습니다.</p>
+      <ul>
+        <li><strong>개인정보침해 신고센터</strong>: privacy.kisa.or.kr / 국번없이 118</li>
+        <li><strong>개인정보 분쟁조정위원회</strong>: kopico.go.kr / 1833-6972</li>
+        <li><strong>대검찰청 사이버수사과</strong>: spo.go.kr / 국번없이 1301</li>
+        <li><strong>경찰청 사이버수사국</strong>: ecrm.cyber.go.kr / 국번없이 182</li>
+      </ul>
+    </section>
+
+    <section id="s13">
+      <h2><span class="num">13</span>아동의 개인정보 보호</h2>
+      <p>
+        본 앱은 만 14세 미만 아동의 개인정보를 별도로 수집하지 않습니다.
+        다만 본 앱이 카메라를 사용하므로, 만 14세 미만 아동이 사용할 경우 법정대리인의 동의 하에 사용하시기를 권장합니다.
+      </p>
+    </section>
+
+    <section id="s14">
+      <h2><span class="num">14</span>방침의 변경</h2>
+      <p>
+        본 개인정보처리방침의 내용 추가, 삭제 및 수정이 있을 경우 시행 7일 전부터 본 페이지를 통해 고지합니다.
+        다만, 이용자 권리의 중요한 변경이 있을 경우에는 시행 30일 전부터 고지합니다.
+      </p>
+      <ul>
+        <li>공고일자: 2026년 4월 24일</li>
+        <li>시행일자: 2026년 5월 1일</li>
+      </ul>
+    </section>
+
+    <div class="note warn" style="margin-top: 60px;">
+      <strong>법적 면책 안내:</strong> 본 문서는 푸시업 옵저버 앱의 동작 방식을 기반으로 작성된 템플릿입니다.
+      실제 배포 전에 변호사 등 법률 전문가의 검토를 받으시기를 권장합니다.
+      <code style="color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:13px;">TODO</code> 표시된 항목은 반드시 사업자 정보로 교체하셔야 합니다.
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="index.html">홈</a>
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="terms.html">이용약관</a>
+        <a href="mailto:support@example.com">문의</a>
+      </div>
+      <div class="footer-copy">© 2026 Push-up Observer. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
